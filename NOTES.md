@@ -105,8 +105,9 @@ All processing is local. No data is collected, transmitted, or shared.
 
 **Category**
 ```
-Productivity
+Tools
 ```
+(Under the PRODUCTIVITY section header -- "Productivity" itself is not selectable)
 
 **Language**
 ```
