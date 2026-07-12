@@ -1,3 +1,5 @@
 session.jsonl
 src_orig/
 build/
+*.pem
+*.crx

@@ -24,7 +24,7 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Building release for v$VERSION"
 
-      - name: Build package
+      - name: Build ZIP
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           BUILD_DIR=$(mktemp -d)
@@ -34,19 +34,66 @@ jobs:
                    --exclude='session.jsonl' \
                    --exclude='CONTEXT.md' \
                    --exclude='README.md' \
+                   --exclude='NOTES.md' \
+                   --exclude='*.pem' \
+                   --exclude='*.crx' \
                    --exclude='build/' \
                    . "$BUILD_DIR/"
           mkdir -p build
           ZIP_NAME="cookie-shield-v${VERSION}.zip"
           (cd "$BUILD_DIR" && zip -r "$GITHUB_WORKSPACE/build/$ZIP_NAME" .)
-          echo "zip_name=$ZIP_NAME" >> $GITHUB_ENV
           echo "Package: $ZIP_NAME ($(du -h build/$ZIP_NAME | cut -f1))"
 
-      - name: Upload artifact
+      - name: Build CRX
+        env:
+          CHROME_EXTENSION_KEY: ${{ secrets.CHROME_EXTENSION_KEY }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+
+          # Install chromium
+          sudo apt-get install -y -q chromium-browser 2>/dev/null || \
+            sudo apt-get install -y -q chromium 2>/dev/null
+
+          CHROMIUM=$(command -v chromium-browser || command -v chromium)
+
+          # Write signing key from secret (base64-encoded PEM)
+          if [ -n "$CHROME_EXTENSION_KEY" ]; then
+            echo "$CHROME_EXTENSION_KEY" | base64 -d > /tmp/cookie-shield.pem
+            KEY_ARG="--pack-extension-key=/tmp/cookie-shield.pem"
+          else
+            echo "WARNING: CHROME_EXTENSION_KEY secret not set, generating a new key (unsigned release)"
+            KEY_ARG=""
+          fi
+
+          # Stage extension for packing (excludes dev files)
+          PACK_DIR=$(mktemp -d)
+          rsync -a --exclude='.git*' \
+                   --exclude='.github/' \
+                   --exclude='src_orig/' \
+                   --exclude='session.jsonl' \
+                   --exclude='CONTEXT.md' \
+                   --exclude='README.md' \
+                   --exclude='NOTES.md' \
+                   --exclude='*.pem' \
+                   --exclude='*.crx' \
+                   --exclude='build/' \
+                   . "$PACK_DIR/cookie-shield/"
+
+          "$CHROMIUM" --pack-extension="$PACK_DIR/cookie-shield" $KEY_ARG --no-message-box 2>/dev/null || true
+
+          CRX_SRC="$PACK_DIR/cookie-shield.crx"
+          if [ -f "$CRX_SRC" ]; then
+            cp "$CRX_SRC" "build/cookie-shield-v${VERSION}.crx"
+            echo "CRX: cookie-shield-v${VERSION}.crx ($(du -h build/cookie-shield-v${VERSION}.crx | cut -f1))"
+          else
+            echo "WARNING: CRX build failed, skipping"
+          fi
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: cookie-shield-v${{ steps.version.outputs.version }}
-          path: build/*.zip
+          path: build/
           retention-days: 90
 
       - name: Create GitHub Release
@@ -54,15 +101,19 @@ jobs:
         with:
           tag_name: v${{ steps.version.outputs.version }}
           name: Cookie Shield v${{ steps.version.outputs.version }}
-          files: build/*.zip
+          files: build/*
           body: |
             ## Cookie Shield v${{ steps.version.outputs.version }}
 
-            ### Install (unpacked / developer mode)
-            1. Download the `.zip` from the Assets below and unzip it
+            ### Install options
+
+            **Load unpacked (ZIP)** — recommended for most users
+            1. Download `cookie-shield-v${{ steps.version.outputs.version }}.zip` from Assets below and unzip it
             2. Open `chrome://extensions`
             3. Enable **Developer mode** (top right)
             4. Click **Load unpacked** and select the unzipped folder
+
+            **CRX** — drag `cookie-shield-v${{ steps.version.outputs.version }}.crx` onto `chrome://extensions`
 
             ### What's in this release
             See [README](https://github.com/${{ github.repository }}/blob/main/README.md) for full feature details.
@@ -86,19 +137,16 @@ jobs:
       #     VERSION="${{ steps.version.outputs.version }}"
       #     ZIP_PATH="build/cookie-shield-v${VERSION}.zip"
       #
-      #     # Get access token
       #     ACCESS_TOKEN=$(curl -s -X POST https://oauth2.googleapis.com/token \
       #       -d "client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&refresh_token=${REFRESH_TOKEN}&grant_type=refresh_token" \
       #       | jq -r '.access_token')
       #
-      #     # Upload new version
       #     curl -s -X PUT \
       #       "https://www.googleapis.com/upload/chromewebstore/v1.1/items/${EXTENSION_ID}" \
       #       -H "Authorization: Bearer ${ACCESS_TOKEN}" \
       #       -H "x-goog-api-version: 2" \
       #       -T "$ZIP_PATH"
       #
-      #     # Submit for review
       #     curl -s -X POST \
       #       "https://www.googleapis.com/chromewebstore/v1.1/items/${EXTENSION_ID}/publish" \
       #       -H "Authorization: Bearer ${ACCESS_TOKEN}" \

@@ -1,12 +1,27 @@
 # Next Steps
 
-## 1. Create GitHub repo and push
+## 1. ~~Create GitHub repo and push~~ (done)
+
+## 2. Add CRX signing key secret
+
+The release workflow builds both a ZIP and a CRX. The CRX is signed with `cookie-shield.pem`
+(gitignored, lives in the project root). To use the same key in CI:
 
 ```bash
-gh repo create cookie-shield --public --source=. --remote=origin --push
+# Base64-encode the pem and add it as a GitHub secret
+base64 -i cookie-shield.pem | pbcopy   # copies to clipboard
 ```
 
-## 2. Wire up Chrome Web Store publishing
+Then in GitHub repo **Settings -> Secrets and variables -> Actions**, add:
+
+| Secret | Value |
+|---|---|
+| `CHROME_EXTENSION_KEY` | Paste the base64-encoded PEM from clipboard |
+
+Without this secret the workflow still runs but generates a new throwaway key each time
+(CRX won't be consistently signed across releases).
+
+## 3. Wire up Chrome Web Store publishing
 
 The `release.yml` workflow has the CWS publish step ready but commented out. To enable it:
 
@@ -43,7 +58,7 @@ In GitHub repo Settings -> Secrets and variables -> Actions, add:
 
 In `.github/workflows/release.yml`, uncomment the `# - name: Publish to Chrome Web Store` block.
 
-## 3. First submission to CWS (manual)
+## 4. First submission to CWS (manual)
 
 Automated publishing only works for **updates** to an existing listing. The first submission must be done manually:
 
@@ -55,7 +70,7 @@ Automated publishing only works for **updates** to an existing listing. The firs
 
 After approval, the extension ID is in the dashboard URL -- add it as the `CHROME_EXTENSION_ID` secret. From that point on, pushing a `v*` tag triggers the full automated release.
 
-## 4. Version workflow
+## 5. Version workflow
 
 - **Patch** (bug fixes): `fix: description` commit message or manual bump-version workflow
 - **Minor** (new features): `feat: description` commit message
