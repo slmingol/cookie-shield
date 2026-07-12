@@ -1,5 +1,8 @@
 # Cookie Shield
 
+[![Validate](https://github.com/slmingol/cookie-shield/actions/workflows/validate.yml/badge.svg)](https://github.com/slmingol/cookie-shield/actions/workflows/validate.yml)
+[![Release](https://github.com/slmingol/cookie-shield/actions/workflows/release.yml/badge.svg)](https://github.com/slmingol/cookie-shield/actions/workflows/release.yml)
+
 A Chrome extension for real-time detection of affiliate tracking cookies and affiliate link highlighting, with per-site control over link highlighting.
 
 Cookie Shield is a fork of [Cookie Guard](https://chromewebstore.google.com/detail/cookie-guard/ifjhcahbhkfojdmkndpkmkffbjnefido) by MegaLag. It retains all original functionality and adds the ability to enable or disable affiliate link highlighting on a per-site basis -- the one gap in Cookie Guard's settings that had no workaround short of Chrome's own extension-level site toggle.
