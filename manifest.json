@@ -48,7 +48,7 @@
     "windows",
     "webNavigation"
   ],
-  "version": "1.0.3",
+  "version": "1.0.4",
   "web_accessible_resources": [
     {
       "matches": [
