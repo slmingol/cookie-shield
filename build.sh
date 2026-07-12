@@ -30,7 +30,6 @@ BUILD_DIR=$(mktemp -d)
 rsync -a \
   --exclude='.git*' \
   --exclude='.github/' \
-  --exclude='src_orig/' \
   --exclude='session.jsonl' \
   --exclude='CONTEXT.md' \
   --exclude='README.md' \
@@ -53,7 +52,6 @@ if [ -f "$CHROME" ]; then
   rsync -a \
     --exclude='.git*' \
     --exclude='.github/' \
-    --exclude='src_orig/' \
     --exclude='session.jsonl' \
     --exclude='CONTEXT.md' \
     --exclude='README.md' \
