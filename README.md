@@ -2,6 +2,10 @@
 
 [![Validate](https://github.com/slmingol/cookie-shield/actions/workflows/validate.yml/badge.svg)](https://github.com/slmingol/cookie-shield/actions/workflows/validate.yml)
 [![Release](https://github.com/slmingol/cookie-shield/actions/workflows/release.yml/badge.svg)](https://github.com/slmingol/cookie-shield/actions/workflows/release.yml)
+[![Auto Version](https://github.com/slmingol/cookie-shield/actions/workflows/auto-version.yml/badge.svg)](https://github.com/slmingol/cookie-shield/actions/workflows/auto-version.yml)
+[![Latest Release](https://img.shields.io/github/v/release/slmingol/cookie-shield?label=version)](https://github.com/slmingol/cookie-shield/releases/latest)
+[![Manifest Version](https://img.shields.io/badge/manifest-v3-blue)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
+[![Stars](https://img.shields.io/github/stars/slmingol/cookie-shield)](https://github.com/slmingol/cookie-shield/stargazers)
 
 A Chrome extension for real-time detection of affiliate tracking cookies and affiliate link highlighting, with per-site control over link highlighting.
 
