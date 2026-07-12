@@ -1,34 +1,64 @@
 {
-   "action": {
-      "default_icon": {
-         "128": "img/icon128.png",
-         "16": "img/icon16.png",
-         "48": "img/icon48.png"
-      },
-      "default_popup": "src/ui/popup.html"
-   },
-   "background": {
-      "service_worker": "src/background.js"
-   },
-   "content_scripts": [ {
-      "css": [ "src/ui/css/content/alert-injector.css", "src/ui/css/content/linkHighlighter.css" ],
-      "js": [ "src/patterns/cookiePatterns.js", "src/managers/amazonDetector.js", "src/content/alert-injector.js", "src/content/linkHighlighter.js" ],
-      "matches": [ "http://*/*", "https://*/*" ],
-      "run_at": "document_idle"
-   } ],
-   "description": "Real-time detection of affiliate tracking cookies, with per-site affiliate link highlighting control",
-   "host_permissions": [ "http://*/*", "https://*/*" ],
-   "icons": {
+  "action": {
+    "default_icon": {
       "128": "img/icon128.png",
       "16": "img/icon16.png",
       "48": "img/icon48.png"
-   },
-   "manifest_version": 3,
-   "name": "Cookie Shield",
-   "permissions": [ "cookies", "tabs", "storage", "windows", "webNavigation" ],
-   "version": "1.0",
-   "web_accessible_resources": [ {
-      "matches": [ "http://*/*", "https://*/*" ],
-      "resources": [ "img/icon48.png", "src/content/alert.html" ]
-   } ]
+    },
+    "default_popup": "src/ui/popup.html"
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "src/ui/css/content/alert-injector.css",
+        "src/ui/css/content/linkHighlighter.css"
+      ],
+      "js": [
+        "src/patterns/cookiePatterns.js",
+        "src/managers/amazonDetector.js",
+        "src/content/alert-injector.js",
+        "src/content/linkHighlighter.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "description": "Real-time detection of affiliate tracking cookies, with per-site affiliate link highlighting control",
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "128": "img/icon128.png",
+    "16": "img/icon16.png",
+    "48": "img/icon48.png"
+  },
+  "manifest_version": 3,
+  "name": "Cookie Shield",
+  "permissions": [
+    "cookies",
+    "tabs",
+    "storage",
+    "windows",
+    "webNavigation"
+  ],
+  "version": "1.0.1",
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "resources": [
+        "img/icon48.png",
+        "src/content/alert.html"
+      ]
+    }
+  ]
 }
