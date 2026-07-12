@@ -44,17 +44,16 @@ jobs:
           (cd "$BUILD_DIR" && zip -r "$GITHUB_WORKSPACE/build/$ZIP_NAME" .)
           echo "Package: $ZIP_NAME ($(du -h build/$ZIP_NAME | cut -f1))"
 
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
       - name: Build CRX
         env:
           CHROME_EXTENSION_KEY: ${{ secrets.CHROME_EXTENSION_KEY }}
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-
-          # Install chromium
-          sudo apt-get install -y -q chromium-browser 2>/dev/null || \
-            sudo apt-get install -y -q chromium 2>/dev/null
-
-          CHROMIUM=$(command -v chromium-browser || command -v chromium)
+          CHROME=$(command -v google-chrome || command -v google-chrome-stable || command -v chrome)
 
           # Write signing key from secret (base64-encoded PEM)
           if [ -n "$CHROME_EXTENSION_KEY" ]; then
@@ -79,7 +78,7 @@ jobs:
                    --exclude='build/' \
                    . "$PACK_DIR/cookie-shield/"
 
-          "$CHROMIUM" --pack-extension="$PACK_DIR/cookie-shield" $KEY_ARG --no-message-box 2>/dev/null || true
+          "$CHROME" --pack-extension="$PACK_DIR/cookie-shield" $KEY_ARG --no-message-box 2>/dev/null || true
 
           CRX_SRC="$PACK_DIR/cookie-shield.crx"
           if [ -f "$CRX_SRC" ]; then
