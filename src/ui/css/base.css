@@ -1,0 +1,28 @@
+/**
+ * Base Styles
+ * 
+ * Foundation styles for the extension
+ */
+
+body {
+  width: 380px;
+  max-height: 600px;
+  margin: 0;
+  font-family: 'Space Mono', monospace;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 12px;
+  overflow: hidden; 
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  direction: ltr; 
+  animation: popupOpen 1s ease-out;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+

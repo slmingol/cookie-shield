@@ -1,0 +1,97 @@
+/**
+ * Layout
+ * 
+ * Main structural components
+ */
+
+.container {
+  padding: 20px;
+  padding-bottom: 20px;
+  background: linear-gradient(180deg, 
+    var(--bg-color) 0%,
+    var(--bg-secondary) 100%);
+  border-radius: 12px;
+  overflow-x: hidden; 
+  overflow-y: auto; 
+  max-height: 560px; 
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  position: relative;
+  animation: fadeSlideDown 0.5s ease-out forwards;
+}
+
+.logo-container {
+  position: relative;
+  margin-right: 15px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 0 8px var(--primary-glow));
+}
+
+.logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+  opacity: 0.5;
+}
+
+.accent {
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--danger-glow);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.section-header h2 {
+  font-size: 16px;
+  margin: 0;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  margin-left: 8px;
+  animation: pulse 2s infinite;
+}
+
+.state-container {
+  animation: fadeSlideDown 0.6s ease-out;
+  margin-bottom: 20px;
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.controls-compact {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+

@@ -1,0 +1,280 @@
+/**
+ * Scrollbars
+ * 
+ * Custom scrollbar styling
+ */
+
+.cyber-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.cyber-scroll::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.cyber-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.cyber-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+/* Container scrollbar */
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Modal overlay scrollbar */
+.modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Textarea scrollbar */
+textarea.cyber-input::-webkit-scrollbar {
+  width: 8px;
+}
+
+textarea.cyber-input::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+textarea.cyber-input::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+textarea.cyber-input::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Cookie list scrollbar */
+.cookie-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cookie-list::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.cookie-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.cookie-list::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Activity list scrollbar */
+.activity-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.activity-list::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.activity-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.activity-list::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Active cookies container scrollbar */
+.active-cookies-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.active-cookies-container::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.active-cookies-container::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.active-cookies-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Pattern list container scrollbar */
+.pattern-list-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pattern-list-container::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.pattern-list-container::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.pattern-list-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Domains list scrollbar */
+.domains-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.domains-list::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.domains-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.domains-list::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Notification list container scrollbar */
+.notification-list-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.notification-list-container::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.notification-list-container::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.notification-list-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Recent activity scrollbar */
+.recent-activity::-webkit-scrollbar {
+  width: 8px;
+}
+
+.recent-activity::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.recent-activity::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.recent-activity::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Alert cookies list scrollbar */
+.alert-cookies-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.alert-cookies-list::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.alert-cookies-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.alert-cookies-list::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Cookie inspector window content scrollbar */
+.window-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.window-content::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  border: 2px solid var(--bg-color);
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+

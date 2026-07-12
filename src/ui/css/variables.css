@@ -1,0 +1,19 @@
+/**
+ * CSS Variables
+ * 
+ * Global design tokens - colors, spacing, shadows
+ */
+
+:root {
+  --primary-color: #0ff;
+  --primary-glow: #0ff8;
+  --danger-color: #ff2b4a;
+  --danger-glow: #ff2b4a88;
+  --bg-color: #0a0a0f;
+  --bg-secondary: #12151f;
+  --text-color: #fff;
+  --text-secondary: #8a8d93;
+  --accent-color: #ff2b4a;
+  --border-color: #1a1f2e;
+}
+

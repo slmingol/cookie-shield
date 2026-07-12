@@ -1,0 +1,131 @@
+/**
+ * Settings View
+ * 
+ * Settings interface styles
+ */
+
+.header-icons {
+  position: absolute;
+  top: 28px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+}
+
+.header-icon {
+  cursor: pointer;
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.header-icon:hover {
+  color: var(--text-color);
+  text-shadow: 0 0 10px var(--primary-glow);
+}
+
+#settingsIcon:hover {
+  transform: rotate(30deg);
+}
+
+#cookieSearchIcon:hover {
+  transform: scale(1.1);
+}
+
+.header-icon .material-icons {
+  font-size: 20px;
+}
+
+.settings-section {
+  margin-bottom: 30px;
+}
+
+.settings-section h2 {
+  color: var(--primary-color);
+  font-size: 18px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--primary-color);
+  padding-bottom: 8px;
+}
+
+.settings-content {
+  padding: 15px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.settings-placeholder {
+  text-align: center;
+  padding: 50px 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+#settingsView,
+#mainContentView,
+#patternManagementView {
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  transform-origin: center top;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(-15px);
+  pointer-events: none;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+  will-change: opacity, transform;
+}
+
+.view-container {
+  position: relative;
+  width: 100%;
+}
+
+.absolute-pos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.active-view {
+  z-index: 2;
+}
+
+.setting-item {
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-label {
+  flex: 1;
+}
+
+.setting-description {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 5px 0 0 0;
+  line-height: 1.4;
+}
+

@@ -1,0 +1,156 @@
+/**
+ * Network Manager View
+ * 
+ * Pattern management interface
+ */
+
+.settings-panel {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.panel-header {
+  margin-bottom: 20px;
+}
+
+.panel-header h2 {
+  color: var(--primary-color);
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.panel-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+  padding: 5px 0;
+}
+
+.panel-actions .cyber-button {
+  min-width: 160px;
+  text-align: center;
+  padding: 10px 16px;
+}
+
+.pattern-list-container {
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 20px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+}
+
+.pattern-group {
+  margin-bottom: 15px;
+}
+
+.pattern-group-header {
+  background: var(--bg-color);
+  padding: 10px 12px;
+  border-radius: 4px 4px 0 0;
+  font-weight: bold;
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pattern-item {
+  padding: 10px 12px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pattern-item:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+.pattern-info {
+  flex: 1;
+}
+
+.pattern-name {
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.pattern-type {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+
+.pattern-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.pattern-section {
+  margin-bottom: 16px;
+}
+
+.pattern-section h4 {
+  color: var(--text-secondary);
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.domains-section {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.domains-list {
+  max-height: 80px;
+  overflow-y: auto;
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.pattern-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.pattern-input {
+  flex: 1;
+}
+
+.add-pattern-btn {
+  padding: 4px 8px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.loading, .error, .no-networks {
+  padding: 20px;
+  text-align: center;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.error {
+  color: var(--danger-color);
+}
+
+.no-patterns {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 12px;
+}
+

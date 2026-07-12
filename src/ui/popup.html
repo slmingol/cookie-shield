@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Cookie Shield</title>
+  <link rel="stylesheet" href="css/main.css?v=2.0">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+  <div class="container">
+    <!-- Header icons -->
+    <div class="header-icons">
+      <div id="cookieSearchIcon" class="header-icon">
+        <span class="material-icons">search</span>
+      </div>
+      <div id="settingsIcon" class="header-icon">
+        <span class="material-icons">settings</span>
+      </div>
+    </div>
+    
+    <div class="header">
+      <div class="logo-container">
+        <img src="../../img/icon48.png" alt="Logo" class="logo">
+        <div class="logo-glow"></div>
+      </div>
+      <h1>Cookie<span class="accent">Shield</span></h1>
+    </div>
+
+    <!-- Main Content View -->
+    <div id="mainContentView">
+      <!-- Normal monitoring state -->
+      <div id="monitoringState" class="state-container">
+        <div class="activity-section">
+          <div class="section-header">
+            <h2>Monitoring Live<span class="blink">_</span></h2>
+            <div class="pulse"></div>
+          </div>
+          <div id="cookieActivity" class="activity-list cyber-scroll"></div>
+        </div>
+      </div>
+
+      <!-- Alert state -->
+      <div id="alertState" class="state-container" style="display: none;">
+        <div class="alert-section">
+          <div class="alert-icon">⚠️</div>
+          <div class="alert-message" id="alertMessage"></div>
+          <div class="alert-summary" id="alertSummary"></div>
+        </div>
+        <div class="alert-cookies-container">
+          <div id="alertCookiesList" class="alert-cookies-list cyber-scroll"></div>
+        </div>
+        <div id="recentActivity" class="recent-activity cyber-scroll"></div>
+        <button id="pauseSiteBtn" class="btn-unified compact warning" style="margin-top: 16px;">
+          <span class="material-icons">pause_circle</span>
+          <span class="btn-text">Pause alerts on this site</span>
+        </button>
+      </div>
+
+      <!-- Cookie list container (shared between states) -->
+      <div id="activeCookiesContainer" class="active-cookies-container" style="display: none;">
+        <div class="section-header">
+          <h2>Active Affiliate Cookies</h2>
+        </div>
+        <div id="activeCookiesList" class="cookie-list cyber-scroll"></div>
+        
+        <!-- Update button text to be more clear -->
+        <div class="cookie-actions">
+          <button id="clearAllCookies" class="cyber-button secondary">Clear Detected Cookies</button>
+        </div>
+      </div>
+      
+      <!-- Compact Controls Section -->
+      <div class="controls-compact">
+        <button id="viewActiveCookies" class="btn-unified compact primary">
+          <span class="material-icons">list</span>
+          <span class="btn-text">View All Cookies</span>
+        </button>
+        <button id="hideActiveCookies" class="btn-unified compact primary" style="display: none;">
+          <span class="material-icons">visibility_off</span>
+          <span class="btn-text">Hide All Cookies</span>
+        </button>
+        <button id="quickPauseBtn" class="btn-unified compact warning">
+          <span class="material-icons">pause_circle</span>
+          <span class="btn-text">Pause alerts on this site</span>
+        </button>
+        <button id="highlightSiteBtn" class="btn-unified compact secondary">
+          <span class="material-icons">visibility_off</span>
+          <span class="btn-text">Disable highlighting here</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Settings View -->
+    <div id="settingsView" style="display: none;">
+      <div class="settings-section">
+        <h2>Settings</h2>
+        <div class="settings-content">
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>Cookie Notifications</span>
+            </div>
+            <label class="cyber-toggle">
+              <input type="checkbox" id="notificationsToggle" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>Affiliate Link Highlighting</span>
+            </div>
+            <label class="cyber-toggle">
+              <input type="checkbox" id="highlightingToggle" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>Cookie Refresh Alerts</span>
+            </div>
+            <label class="cyber-toggle">
+              <input type="checkbox" id="refreshAlertsToggle" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          
+          <!-- Cookie Pattern Management Link -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>Manage Cookie Patterns</span>
+            </div>
+            <button id="managePatternsBtn" class="cyber-button mini">Manage</button>
+          </div>
+
+          <!-- Alert Management (summary only) -->
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>Manage Alerts</span>
+              <p class="setting-description">Paused for <span id="pausedSitesCount">0</span> domains</p>
+            </div>
+            <button id="manageNotificationsBtn" class="cyber-button mini" style="margin-top: 8px;">Manage</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="controls">
+        <button id="backButton" class="cyber-button">Back to Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Replace the Pattern Management View with this improved version -->
+    <div id="patternManagementView" style="display: none;">
+      <div class="section-header">
+        <h2>Manage Network Cookies</h2>
+      </div>
+      
+      <div class="pattern-list-container cyber-scroll">
+        <div id="networkList"></div>
+      </div>
+      
+      <div class="panel-actions">
+        <button id="addNetworkBtn" class="cyber-button">Add New Group</button>
+        <button id="restoreDefaultsBtn" class="cyber-button secondary">Restore Defaults</button>
+      </div>
+      
+      <div class="controls">
+        <button id="backToSettingsBtn" class="cyber-button">Back to Settings</button>
+      </div>
+    </div>
+
+    <!-- Replace the Pattern Edit Modal with Network Edit Modal -->
+    <div id="networkEditModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="networkModalTitle">Add Network</h3>
+          <span class="close" id="closeNetworkModal">&times;</span>
+        </div>
+        <!-- Replace the network modal form content with this simpler version -->
+        <div class="modal-body">
+          <form id="networkForm">
+            <div class="form-group">
+              <label for="networkName">Network Name</label>
+              <input type="text" id="networkName" class="cyber-input" placeholder="e.g., amazon, google" required>
+            </div>
+            
+            <div class="form-section">
+              <h4>First-Party Cookies</h4>
+              <div class="form-group">
+                <textarea id="firstPartyPatternList" class="cyber-input" rows="2" 
+                  placeholder="_ga, _fbp, aff_, amzn_"></textarea>
+              </div>
+            </div>
+            
+            <div class="form-section">
+              <h4>Third-Party Cookies</h4>
+              <div class="form-group">
+                <textarea id="thirdPartyPatternList" class="cyber-input" rows="2" 
+                  placeholder="cj_, trk_, _pj, affid"></textarea>
+              </div>
+            </div>
+            
+            <div class="form-section">
+              <h4>Third-Party Domains</h4>
+              <textarea id="networkDomains" class="cyber-input" rows="2" 
+                placeholder=".example.com, .tracker.com, .affiliate.net"></textarea>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="cyber-button">Save</button>
+              <button type="button" id="cancelNetworkEdit" class="cyber-button secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manage Alerts Panel -->
+    <div id="notificationManagementView" style="display: none;">
+      <div class="section-header">
+        <h2>Manage Alerts</h2>
+      </div>
+
+      <!-- Paused Sites List -->
+      <div style="margin-bottom: 8px;">
+        <h3 style="margin: 0 0 6px 0; color: var(--primary-color); font-size: 14px;">Paused Alert Sites</h3>
+        <p style="margin: 0 0 10px 0; color: var(--text-secondary); font-size: 12px;">These sites will not trigger cookie alerts.</p>
+      </div>
+      <div class="notification-list-container cyber-scroll" style="max-height: 140px;">
+        <ul id="managePausedSitesList" class="paused-sites-list" style="padding: 0; margin: 0;"></ul>
+      </div>
+
+      <!-- Highlighting Disabled Sites List -->
+      <div style="margin: 16px 0 8px 0;">
+        <h3 style="margin: 0 0 6px 0; color: var(--primary-color); font-size: 14px;">Highlighting Disabled Sites</h3>
+        <p style="margin: 0 0 10px 0; color: var(--text-secondary); font-size: 12px;">Affiliate link highlighting is off for these sites.</p>
+      </div>
+      <div class="notification-list-container cyber-scroll" style="max-height: 140px;">
+        <ul id="manageHighlightDisabledSitesList" class="paused-sites-list" style="padding: 0; margin: 0;"></ul>
+      </div>
+
+      <div class="controls" style="margin-top: 20px;">
+        <button id="backToSettingsFromNotificationsBtn" class="cyber-button" style="width: 100%;">Back to Settings</button>
+      </div>
+    </div>
+
+    <!-- Cookie Inspector View -->
+    <div id="cookieInspectorView" style="display: none;">
+      <div class="section-header">
+        <h2>Cookie Inspector</h2>
+        <button id="openInWindowBtn" class="icon-button" title="Open in new window">
+          <span class="material-icons">open_in_new</span>
+        </button>
+      </div>
+      
+      <div class="tab-container">
+        <div class="tabs">
+          <button class="tab-button active" data-tab="search">Cookie Search</button>
+          <button class="tab-button" data-tab="activity">Activity Monitor</button>
+        </div>
+      </div>
+      
+      <div id="searchTab" class="tab-content active">
+        <div class="search-container">
+          <div class="filter-fields">
+            <div class="input-group">
+              <label for="domainFilter">Domain Contains</label>
+              <input type="text" id="domainFilter" class="cyber-input" placeholder="e.g., nike.com" />
+            </div>
+
+            <div class="input-group">
+              <label for="nameFilter">Name Starts With</label>
+              <input type="text" id="nameFilter" class="cyber-input" placeholder="e.g., click_id" />
+            </div>
+            
+            <div class="input-group">
+              <label for="valueFilter">Value Contains</label>
+              <input type="text" id="valueFilter" class="cyber-input" placeholder="xyz..." />
+            </div>
+          </div>
+          
+          <div class="button-row">
+            <button id="searchBtn" class="btn-unified compact primary">
+              <span class="material-icons">search</span>
+              <span class="btn-text">Search</span>
+            </button>
+            <button id="clearBtn" class="btn-unified compact warning">
+              <span class="material-icons">delete_sweep</span>
+              <span class="btn-text">Clear</span>
+            </button>
+          </div>
+        </div>
+        
+        <table id="cookieTable" class="cookie-inspector-table">
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>Name</th>
+              <th>Value</th>
+              <th>Path</th>
+              <th>Expires</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Cookies get populated here -->
+          </tbody>
+        </table>
+      </div>
+      
+      <div id="activityTab" class="tab-content" style="display: none;">
+        <div class="activity-header">
+          <h3 style="margin: 0 0 10px 0; color: var(--primary-color); font-size: 16px;">Cookie Activity Monitor</h3>
+          <div class="button-group">
+            <button id="showIgnoreListBtn" class="cyber-button mini">Manage Ignore List</button>
+            <button id="clearActivityBtn" class="cyber-button mini secondary">Clear Activity</button>
+          </div>
+        </div>
+        
+        <div id="ignoreListPanel" class="ignore-list-panel" style="display: none;">
+          <div class="ignore-list-header">
+            <h4 style="margin: 0; color: var(--primary-color);">Domain Ignore List</h4>
+            <button id="closeIgnoreListBtn" class="close-btn">×</button>
+          </div>
+          <div class="ignore-list-content">
+            <div class="input-group" style="display: flex; gap: 8px;">
+              <input type="text" id="ignoreInput" class="cyber-input" placeholder="Enter domain to ignore (e.g., example.com)" />
+              <button id="addIgnoreBtn" class="cyber-button mini">Add</button>
+            </div>
+            <ul id="ignoreList" class="ignore-list">
+              <!-- Ignored domains will be populated here -->
+            </ul>
+          </div>
+        </div>
+        
+        <table id="activityTable" class="cookie-inspector-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Domain</th>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Activity entries get populated here -->
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="controls" style="margin-top: 20px;">
+        <button id="backFromInspectorBtn" class="cyber-button" style="width: 100%;">Back to Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Cookie Inspector Delete Confirmation Modal -->
+    <div id="cookieDeleteDialog" class="modal" style="display: none;">
+      <div class="modal-content modal-alert">
+        <div class="modal-header modal-header-danger">
+          <h3>⚠️ Delete Cookies</h3>
+          <span class="close" id="closeCookieDeleteDialog">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p id="cookieDeleteMessage" class="modal-message"></p>
+          <p class="modal-note" style="color: var(--text-secondary); margin-top: 12px; line-height: 1.5;">
+            <strong>Warning:</strong> You may be deleting app-essential cookies. This could log you out of websites or reset your preferences.
+          </p>
+          <div class="form-actions">
+            <button id="cookieDeleteYesBtn" class="btn-unified warning">
+              <span class="material-icons">delete_sweep</span>
+              <span class="btn-text">Delete</span>
+            </button>
+            <button id="cookieDeleteNoBtn" class="btn-unified primary">
+              <span class="material-icons">close</span>
+              <span class="btn-text">Cancel</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../managers/settingsManager.js"></script>
+  <script src="ui-utils.js"></script>
+  <script src="settings-ui.js"></script>
+  <script src="cookie-inspector.js"></script>
+  <script src="popup.js"></script>
+  <script src="network-manager.js"></script>
+
+  <!-- Add this before the closing </body> tag, after the other modals -->
+  <div id="clearCookiesDialog" class="modal">
+    <div class="modal-content modal-alert">
+      <div class="modal-header modal-header-danger">
+        <h3>⚠️ Clear Affiliate Cookies</h3>
+        <span class="close" id="closeClearDialog">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p id="clearCookiesMessage" class="modal-message">Remove all affiliate tracking cookies detected by CookieShield?</p>
+        <p class="modal-note">This will not affect other cookies on your computer.</p>
+        <div class="form-actions">
+          <button id="clearYesBtn" class="btn-unified warning">
+            <span class="material-icons">delete_sweep</span>
+            <span class="btn-text">Clear</span>
+          </button>
+          <button id="clearNoBtn" class="btn-unified primary">
+            <span class="material-icons">close</span>
+            <span class="btn-text">Cancel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="customConfirmDialog" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Confirm Action</h3>
+        <span class="close" id="closeConfirmDialog">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage">Are you sure you want to restore default networks? This will remove all custom networks.</p>
+        <div class="form-actions">
+          <button id="confirmYesBtn" class="cyber-button">Yes, Restore</button>
+          <button id="confirmNoBtn" class="cyber-button secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="deleteConfirmDialog" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Delete Network</h3>
+        <span class="close" id="closeDeleteDialog">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p id="deleteMessage"></p>
+        <div class="form-actions">
+          <button id="deleteYesBtn" class="cyber-button secondary">Yes, Delete</button>
+          <button id="deleteNoBtn" class="cyber-button">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

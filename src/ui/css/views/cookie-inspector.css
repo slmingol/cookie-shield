@@ -1,0 +1,281 @@
+/**
+ * Cookie Inspector View
+ * 
+ * Styles for the cookie search and monitoring interface
+ */
+
+/* Icon Button for Open in Window */
+.icon-button {
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+}
+
+.icon-button .material-icons {
+  font-size: 18px;
+}
+
+.icon-button:hover {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  box-shadow: 0 0 10px var(--primary-glow);
+  transform: translateY(-1px);
+}
+
+.icon-button:active {
+  transform: translateY(0);
+}
+
+/* Tab Container */
+.tab-container {
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 15px;
+  gap: 5px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.tab-button:hover {
+  color: var(--primary-color);
+}
+
+.tab-button.active {
+  color: var(--primary-color);
+  background: rgba(0, 255, 255, 0.05);
+}
+
+.tab-button.active::after {
+  background: var(--primary-color);
+  box-shadow: 0 0 8px var(--primary-glow);
+}
+
+/* Search Container */
+.search-container {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.filter-fields {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 500px) {
+  .filter-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-color);
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Cookie Inspector Table */
+.cookie-inspector-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 15px;
+}
+
+.cookie-inspector-table thead {
+  background: rgba(0, 255, 255, 0.08);
+}
+
+.cookie-inspector-table th {
+  padding: 12px 15px;
+  font-weight: 500;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cookie-inspector-table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  font-size: 12px;
+  color: var(--text-color);
+  font-family: 'Space Mono', monospace;
+}
+
+.cookie-inspector-table tr:hover td {
+  background: rgba(0, 255, 255, 0.03);
+}
+
+.cookie-inspector-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Activity Header */
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.activity-header .button-group {
+  display: flex;
+  gap: 8px;
+}
+
+/* Ignore List Panel */
+.ignore-list-panel {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.ignore-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background: rgba(0, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: var(--danger-color);
+}
+
+.ignore-list-content {
+  padding: 15px;
+}
+
+.ignore-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.ignore-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ignore-list::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 3px;
+}
+
+.ignore-list::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+  opacity: 0.5;
+}
+
+.ignore-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+  margin-bottom: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+}
+
+.ignore-list li .remove-btn {
+  color: var(--danger-color);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 18px;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.ignore-list li .remove-btn:hover {
+  color: var(--text-color);
+  transform: scale(1.2);
+}
+

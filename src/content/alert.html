@@ -1,0 +1,59 @@
+<!-- Alert Template for Cookie Detection -->
+<div id="cookieShieldAlert" class="cg-alert-overlay">
+  <div class="cg-alert-container">
+    <div class="cg-alert-section" id="cgAlertSection">
+      <button class="cg-close-btn" id="cgCloseBtn" aria-label="Close alert">×</button>
+      
+      <!-- Initial View (collapsed) -->
+      <div class="cg-alert-initial" id="cgAlertInitial">
+        <!-- Branding -->
+        <div class="cg-alert-branding">
+          <div class="cg-alert-logo-container">
+            <img src="{{LOGO_URL}}" alt="Logo" class="cg-alert-logo">
+            <div class="cg-alert-logo-glow"></div>
+          </div>
+          <h2 class="cg-alert-title">Cookie<span class="cg-accent">Shield</span></h2>
+        </div>
+
+        <!-- Alert Icon and Message -->
+        <div class="cg-alert-icon">{{ALERT_ICON}}</div>
+        <div class="cg-alert-message">{{ALERT_MESSAGE}}</div>
+        <div class="cg-alert-subtitle" id="cgAlertSubtitle">{{ALERT_SUBTITLE}}</div>
+
+        <!-- Inspect Button -->
+        <button class="cg-inspect-btn" id="cgInspectBtn">Inspect</button>
+      </div>
+
+      <!-- Expanded View (hidden initially) -->
+      <div class="cg-alert-expanded" id="cgAlertExpanded" style="display: none;">
+        <!-- Branding -->
+        <div class="cg-alert-branding">
+          <div class="cg-alert-logo-container">
+            <img src="{{LOGO_URL}}" alt="Logo" class="cg-alert-logo">
+            <div class="cg-alert-logo-glow"></div>
+          </div>
+          <h2 class="cg-alert-title">Cookie<span class="cg-accent">Shield</span></h2>
+        </div>
+
+        <!-- Cookies List -->
+        <div class="cg-alert-cookies-container" id="cgCookiesContainer">
+          <div class="cg-alert-cookies-list">
+            {{COOKIES_HTML}}
+          </div>
+        </div>
+
+        <!-- Back Button -->
+        <button class="cg-inspect-btn" id="cgBackBtn" style="margin-top: 15px;">Back</button>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="cg-alert-actions">
+      <button class="cg-btn-unified cg-compact cg-warning" id="cgPauseBtn">
+        <span class="cg-icon">⏸</span>
+        <span class="cg-btn-text">Pause alerts on this site</span>
+      </button>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,113 @@
+/**
+ * Link Highlighter Styles
+ *
+ * Styles for highlighting affiliate links on web pages
+ * Prefixed with 'cookie-shield-' to avoid conflicts
+ */
+
+/* Confirmed Affiliate Links - Red with intense glow */
+.cookie-shield-affiliate-highlight {
+  outline: 2px solid #ff2b4a !important;
+  outline-offset: 2px !important;
+  box-shadow:
+    0 0 5px rgba(255, 43, 74, 0.8),
+    0 0 10px rgba(255, 43, 74, 0.6),
+    0 0 20px rgba(255, 43, 74, 0.4),
+    0 0 30px rgba(255, 43, 74, 0.2) !important;
+  animation: cookie-shield-red-pulse 3s infinite, cookie-shield-red-glow 3s ease-in-out infinite !important;
+  position: relative !important;
+  z-index: 999999 !important;
+  cursor: pointer !important;
+}
+
+/* Potential Amazon Affiliate Links - Orange */
+.cookie-shield-affiliate-potential {
+  outline: 3px solid #ff8c00 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 15px rgba(255, 140, 0, 0.5) !important;
+  animation: cookie-shield-orange-pulse 2s infinite !important;
+  position: relative !important;
+  z-index: 999999 !important;
+  cursor: pointer !important;
+}
+
+/* Red confirmed affiliate animations */
+@keyframes cookie-shield-red-pulse {
+  0% {
+    outline-color: #ff2b4a;
+    box-shadow:
+      0 0 5px rgba(255, 43, 74, 0.8),
+      0 0 10px rgba(255, 43, 74, 0.6),
+      0 0 15px rgba(255, 43, 74, 0.4),
+      0 0 20px rgba(255, 43, 74, 0.2);
+  }
+  50% {
+    outline-color: #ff6b6b;
+    box-shadow:
+      0 0 10px rgba(255, 107, 107, 1.0),
+      0 0 20px rgba(255, 43, 74, 0.8),
+      0 0 30px rgba(255, 43, 74, 0.5),
+      0 0 40px rgba(255, 43, 74, 0.3);
+  }
+  100% {
+    outline-color: #ff2b4a;
+    box-shadow:
+      0 0 5px rgba(255, 43, 74, 0.8),
+      0 0 10px rgba(255, 43, 74, 0.6),
+      0 0 15px rgba(255, 43, 74, 0.4),
+      0 0 20px rgba(255, 43, 74, 0.2);
+  }
+}
+
+@keyframes cookie-shield-red-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px rgba(255, 43, 74, 0.8)) drop-shadow(0 0 10px rgba(255, 43, 74, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(255, 107, 107, 1.0)) drop-shadow(0 0 25px rgba(255, 43, 74, 0.8));
+  }
+}
+
+/* Orange potential affiliate animation */
+@keyframes cookie-shield-orange-pulse {
+  0% {
+    outline-color: #ff8c00;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+  }
+  50% {
+    outline-color: #ffa500;
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.7), 0 0 30px rgba(255, 140, 0, 0.4);
+  }
+  100% {
+    outline-color: #ff8c00;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+  }
+}
+
+.cookie-shield-affiliate-tooltip {
+  position: absolute !important;
+  background: #1a1f2e !important;
+  color: #0ff !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-family: 'Space Mono', monospace !important;
+  white-space: nowrap !important;
+  z-index: 10000000 !important;
+  pointer-events: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 255, 0.3) !important;
+  border: 1px solid #0ff !important;
+  opacity: 0 !important;
+  transform: translateY(10px) !important;
+  transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+
+.cookie-shield-affiliate-tooltip.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.cookie-shield-affiliate-tooltip::before {
+  content: '⚠️ ' !important;
+  margin-right: 4px !important;
+}

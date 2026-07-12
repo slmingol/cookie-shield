@@ -1,0 +1,36 @@
+/**
+ * Utilities
+ * 
+ * Reusable utility classes
+ */
+
+.animating {
+  pointer-events: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.loading, .error, .no-networks {
+  padding: 20px;
+  text-align: center;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.error {
+  color: var(--danger-color);
+}
+
+.no-patterns {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* Utility animation classes */
+.blink {
+  animation: blink 1s infinite;
+}
+

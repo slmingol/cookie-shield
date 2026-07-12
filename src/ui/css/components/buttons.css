@@ -1,0 +1,302 @@
+/**
+ * Buttons
+ * 
+ * All button components and their variants
+ */
+
+/* ===== Unified Button System ===== */
+
+.btn-unified {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+/* Button Icon */
+.btn-unified .material-icons {
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Button Text */
+.btn-unified .btn-text {
+  font-size: 12px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Button Sizes */
+.btn-unified.compact {
+  flex: 1;
+  min-width: 120px;
+  max-width: 160px;
+  padding: 8px 12px;
+  font-size: 11px;
+  gap: 6px;
+}
+
+.btn-unified.compact .material-icons {
+  font-size: 14px;
+}
+
+.btn-unified.compact .btn-text {
+  font-size: 11px;
+}
+
+.btn-unified.full {
+  min-width: 200px;
+  padding: 12px 20px;
+  font-size: 13px;
+}
+
+/* Button States */
+.btn-unified:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-unified:active {
+  transform: translateY(0);
+  transition: all 0.1s;
+}
+
+/* Button Variants */
+.btn-unified.primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color) !important;
+}
+
+.btn-unified.primary:hover {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+.btn-unified.primary:hover .material-icons,
+.btn-unified.primary:hover .btn-text {
+  color: var(--bg-color);
+}
+
+.btn-unified.warning {
+  color: #ff8c00;
+  border-color: #ff8c00 !important;
+}
+
+.btn-unified.warning:hover {
+  background: #ff8c00;
+  color: var(--bg-color);
+  border-color: #ff8c00;
+  box-shadow: 0 2px 8px rgba(255, 140, 0, 0.3);
+}
+
+.btn-unified.warning:hover .material-icons,
+.btn-unified.warning:hover .btn-text {
+  color: var(--bg-color);
+}
+
+.btn-unified.secondary {
+  color: var(--danger-color);
+  border-color: var(--danger-color) !important;
+}
+
+.btn-unified.secondary:hover {
+  background: var(--danger-color);
+  color: var(--bg-color);
+  border-color: var(--danger-color);
+  box-shadow: 0 2px 8px var(--danger-glow);
+}
+
+.btn-unified.secondary:hover .material-icons,
+.btn-unified.secondary:hover .btn-text {
+  color: var(--bg-color);
+}
+
+.btn-unified.success {
+  color: #00ff88;
+  border-color: #00ff88 !important;
+}
+
+.btn-unified.success:hover {
+  background: #00ff88;
+  color: var(--bg-color);
+  border-color: #00ff88;
+  box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
+}
+
+.btn-unified.success:hover .material-icons,
+.btn-unified.success:hover .btn-text {
+  color: var(--bg-color);
+}
+
+/* Responsive */
+@media (max-width: 380px) {
+  .controls-compact {
+    flex-direction: column;
+  }
+  
+  .btn-unified.compact {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+/* Specific Button Overrides */
+#viewActiveCookies,
+#hideActiveCookies,
+#quickPauseBtn,
+#pauseSiteBtn {
+  padding: 12px 16px;
+  gap: 8px;
+}
+
+#viewActiveCookies .btn-text,
+#hideActiveCookies .btn-text,
+#quickPauseBtn .btn-text,
+#pauseSiteBtn .btn-text {
+  font-size: 14px !important;
+}
+
+#viewActiveCookies .material-icons,
+#hideActiveCookies .material-icons,
+#quickPauseBtn .material-icons,
+#pauseSiteBtn .material-icons {
+  font-size: 16px !important; 
+}
+
+#quickPauseBtn .material-icons,
+#pauseSiteBtn .material-icons {
+  position: relative;
+  top: 2px;
+}
+
+#quickPauseBtn .btn-text,
+#pauseSiteBtn .btn-text {
+  position: relative;
+  top: -1px;
+}
+
+/* ===== Cyber Button System ===== */
+
+.cyber-button {
+  background: var(--bg-secondary);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.cyber-button:hover {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  box-shadow: 0 0 20px var(--primary-glow);
+  transform: translateY(-2px);
+}
+
+.cyber-button:active {
+  transform: translateY(1px);
+  transition: all 0.1s;
+}
+
+.cyber-button.secondary {
+  background: var(--bg-color);
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+  box-shadow: 0 0 10px var(--danger-glow);
+}
+
+.cyber-button.secondary:hover {
+  background: var(--danger-color);
+  color: var(--bg-color);
+  box-shadow: 0 0 20px var(--danger-glow);
+}
+
+.cyber-button.orange {
+  background: var(--bg-color);
+  color: #ff8c00;
+  border-color: #ff8c00;
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+}
+
+.cyber-button.orange:hover {
+  background: #ff8c00;
+  color: var(--bg-color);
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.cyber-button.mini {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+/* Pattern Button */
+.pattern-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.3s;
+}
+
+.pattern-btn:hover {
+  color: var(--primary-color);
+}
+
+.pattern-btn.delete:hover {
+  color: var(--danger-color);
+}
+
+/* Inspect Button (Alert View) */
+.inspect-btn {
+  padding: 10px 18px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1);
+}
+
+.inspect-btn:hover {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  box-shadow: 0 4px 16px rgba(0, 255, 255, 0.3);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.inspect-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+

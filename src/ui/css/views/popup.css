@@ -1,0 +1,95 @@
+/**
+ * Popup View
+ * 
+ * Main popup interface styles
+ */
+
+.status-card {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.status-indicator {
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.status-indicator.safe {
+  background: var(--success-color);
+  color: white;
+}
+
+.status-indicator.warning {
+  background: var(--danger-color);
+  color: white;
+}
+
+/* Activity Section */
+.activity-section {
+  margin: 20px 0;
+}
+
+.activity-section h2 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.activity-list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.timestamp {
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+/* Active Cookies Container */
+.active-cookies-container {
+  margin: 0 0 12px 0;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: opacity 0.3s ease;
+  transform-origin: center top;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.cookie-network-group {
+  margin-bottom: 10px;
+}
+
+.network-header {
+  color: var(--primary-color);
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.cookie-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
