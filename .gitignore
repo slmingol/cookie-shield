@@ -1,5 +1,6 @@
 session.jsonl
 src_orig/
 build/
+CONTEXT.md
 *.pem
 *.crx
