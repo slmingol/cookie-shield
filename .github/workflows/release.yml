@@ -1,0 +1,106 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get version
+        id: version
+        run: |
+          VERSION=$(jq -r '.version' manifest.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Building release for v$VERSION"
+
+      - name: Build package
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          BUILD_DIR=$(mktemp -d)
+          rsync -a --exclude='.git*' \
+                   --exclude='.github/' \
+                   --exclude='src_orig/' \
+                   --exclude='session.jsonl' \
+                   --exclude='CONTEXT.md' \
+                   --exclude='README.md' \
+                   --exclude='build/' \
+                   . "$BUILD_DIR/"
+          mkdir -p build
+          ZIP_NAME="cookie-shield-v${VERSION}.zip"
+          (cd "$BUILD_DIR" && zip -r "$GITHUB_WORKSPACE/build/$ZIP_NAME" .)
+          echo "zip_name=$ZIP_NAME" >> $GITHUB_ENV
+          echo "Package: $ZIP_NAME ($(du -h build/$ZIP_NAME | cut -f1))"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cookie-shield-v${{ steps.version.outputs.version }}
+          path: build/*.zip
+          retention-days: 90
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: Cookie Shield v${{ steps.version.outputs.version }}
+          files: build/*.zip
+          body: |
+            ## Cookie Shield v${{ steps.version.outputs.version }}
+
+            ### Install (unpacked / developer mode)
+            1. Download the `.zip` from the Assets below and unzip it
+            2. Open `chrome://extensions`
+            3. Enable **Developer mode** (top right)
+            4. Click **Load unpacked** and select the unzipped folder
+
+            ### What's in this release
+            See [README](https://github.com/${{ github.repository }}/blob/main/README.md) for full feature details.
+          draft: false
+          prerelease: false
+
+      # Chrome Web Store publish
+      # Uncomment and configure after setting these repository secrets:
+      #   CHROME_EXTENSION_ID   - The extension ID from the Chrome Web Store dashboard
+      #   CHROME_CLIENT_ID      - OAuth2 client ID from Google Cloud Console
+      #   CHROME_CLIENT_SECRET  - OAuth2 client secret
+      #   CHROME_REFRESH_TOKEN  - Refresh token (see: https://developer.chrome.com/docs/webstore/using-api)
+      #
+      # - name: Publish to Chrome Web Store
+      #   env:
+      #     EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+      #     CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+      #     CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+      #     REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
+      #   run: |
+      #     VERSION="${{ steps.version.outputs.version }}"
+      #     ZIP_PATH="build/cookie-shield-v${VERSION}.zip"
+      #
+      #     # Get access token
+      #     ACCESS_TOKEN=$(curl -s -X POST https://oauth2.googleapis.com/token \
+      #       -d "client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&refresh_token=${REFRESH_TOKEN}&grant_type=refresh_token" \
+      #       | jq -r '.access_token')
+      #
+      #     # Upload new version
+      #     curl -s -X PUT \
+      #       "https://www.googleapis.com/upload/chromewebstore/v1.1/items/${EXTENSION_ID}" \
+      #       -H "Authorization: Bearer ${ACCESS_TOKEN}" \
+      #       -H "x-goog-api-version: 2" \
+      #       -T "$ZIP_PATH"
+      #
+      #     # Submit for review
+      #     curl -s -X POST \
+      #       "https://www.googleapis.com/chromewebstore/v1.1/items/${EXTENSION_ID}/publish" \
+      #       -H "Authorization: Bearer ${ACCESS_TOKEN}" \
+      #       -H "x-goog-api-version: 2" \
+      #       -H "Content-Length: 0"

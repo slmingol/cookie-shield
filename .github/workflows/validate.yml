@@ -1,0 +1,73 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate manifest.json
+        run: |
+          echo "Validating manifest.json..."
+          if ! jq empty manifest.json 2>/dev/null; then
+            echo "ERROR: manifest.json is not valid JSON"
+            exit 1
+          fi
+          VERSION=$(jq -r '.version' manifest.json)
+          NAME=$(jq -r '.name' manifest.json)
+          echo "Extension: $NAME v$VERSION"
+          echo "manifest.json is valid"
+
+      - name: Check required files
+        run: |
+          REQUIRED=(
+            "manifest.json"
+            "src/background.js"
+            "src/ui/popup.html"
+            "img/icon16.png"
+            "img/icon48.png"
+            "img/icon128.png"
+          )
+          MISSING=0
+          for f in "${REQUIRED[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "MISSING: $f"
+              MISSING=1
+            else
+              echo "OK: $f"
+            fi
+          done
+          if [ $MISSING -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Check icon dimensions
+        run: |
+          sudo apt-get install -y -q file
+          SIZE=$(file img/icon128.png | grep -oP '\d+\s*x\s*\d+' | head -1)
+          echo "icon128.png dimensions: $SIZE"
+
+      - name: Test package build
+        run: |
+          VERSION=$(jq -r '.version' manifest.json)
+          BUILD_DIR=$(mktemp -d)
+          rsync -a --exclude='.git*' \
+                   --exclude='.github/' \
+                   --exclude='src_orig/' \
+                   --exclude='session.jsonl' \
+                   --exclude='CONTEXT.md' \
+                   --exclude='README.md' \
+                   --exclude='build/' \
+                   . "$BUILD_DIR/"
+          ZIP_NAME="cookie-shield-v${VERSION}.zip"
+          (cd "$BUILD_DIR" && zip -r "/tmp/$ZIP_NAME" .)
+          echo "Package built: $ZIP_NAME ($(du -h /tmp/$ZIP_NAME | cut -f1))"
