@@ -91,7 +91,7 @@ Cookie Shield monitors your browser for affiliate tracking cookies and highlight
 Built as a fork of Cookie Guard, Cookie Shield adds one key feature: per-site control over affiliate link highlighting. Cookie Guard only has a global toggle. Cookie Shield lets you disable highlighting on specific sites (like Amazon or price-comparison tools where it gets noisy) while keeping it active everywhere else.
 
 Features:
-- Real-time affiliate cookie detection across all major networks (Amazon Associates, CJ, Rakuten, Awin, Impact, ShareASale, and more)
+- Real-time affiliate cookie detection across all major affiliate networks
 - Affiliate link highlighting with a per-site enable/disable toggle
 - In-page alerts when affiliate cookies are detected, with network identification
 - Cookie inspector to browse and clear detected affiliate cookies
