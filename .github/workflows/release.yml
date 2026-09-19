@@ -43,7 +43,7 @@ jobs:
           (cd "$BUILD_DIR" && zip -r "$GITHUB_WORKSPACE/build/$ZIP_NAME" .)
           echo "Package: $ZIP_NAME ($(du -h build/$ZIP_NAME | cut -f1))"
 
-      - uses: browser-actions/setup-chrome@v1
+      - uses: browser-actions/setup-chrome@v2
         with:
           chrome-version: stable
 
